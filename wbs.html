@@ -1,32 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Docs</title>
+  <title>API Documentation</title>
   <meta charset="utf-8"/>
   <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
 </head>
 <body>
-
-<div id="error" style="color:red;font-family:monospace;"></div>
-
-<script>
-  fetch("data.yaml")
-    .then(r => {
-      if (!r.ok) throw new Error("Cannot load data.yaml");
-      return r.text();
-    })
-    .then(spec => {
-      Redoc.init(
-        spec,
-        {},
-        document.body
-      );
-    })
-    .catch(err => {
-      document.getElementById("error").innerText = err.message;
-      console.error(err);
-    });
-</script>
-
+  <redoc spec-url="data.yaml"></redoc>
 </body>
 </html>
