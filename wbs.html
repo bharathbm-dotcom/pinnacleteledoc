@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>API Documentation</title>
-  <meta charset="utf-8"/>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WBS API Documentation</title>
 
-  <!-- Browser-only Redoc -->
-  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-</head>
-<body>
+    <!-- Mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <redoc spec-url="data.yaml"></redoc>
+    <!-- Redoc styles -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
 
-</body>
+  <body>
+    <!-- Redoc will render here -->
+    <redoc
+      spec-url="data.yaml"
+      scroll-y-offset="60"
+      hide-download-button="false"
+    ></redoc>
+
+    <!-- Redocly CDN -->
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+  </body>
 </html>
