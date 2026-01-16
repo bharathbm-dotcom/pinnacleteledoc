@@ -7,120 +7,74 @@
   <!-- ReDoc -->
   <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
 
-  <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    /* -------- GLOBAL RESET -------- */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
-      background: #f8fafc;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f9fafb;
     }
 
-    /* -------- REDOC CONTAINER -------- */
-    #redoc-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: #ffffff;
-    }
-
-    /* -------- REDOC THEME OVERRIDES -------- */
-    redoc {
-      display: block;
-    }
-
-    /* Sidebar */
-    .menu-content {
-      background: #0f172a !important;
-    }
-
-    .menu-content a {
-      color: #e5e7eb !important;
-    }
-
-    .menu-content a:hover {
-      color: #38bdf8 !important;
-    }
-
-    /* Section titles */
-    h1, h2, h3 {
-      color: #0f172a !important;
-    }
-
-    /* HTTP method badges */
-    .http-verb.get {
-      background: #16a34a !important;
-    }
-
-    .http-verb.post {
-      background: #2563eb !important;
-    }
-
-    .http-verb.put {
-      background: #d97706 !important;
-    }
-
-    .http-verb.delete {
-      background: #dc2626 !important;
-    }
-
-    /* Response panel */
-    .api-content {
-      padding-right: 40px !important;
-    }
-
-    /* Code blocks */
-    pre, code {
-      background: #020617 !important;
-      color: #e5e7eb !important;
-      border-radius: 8px;
-    }
-
-    /* Footer */
-    .footer {
-      display: none;
+    #redoc-root {
+      height: 100%;
     }
   </style>
 </head>
 
 <body>
-  <div id="redoc-container"></div>
+  <div id="redoc-root"></div>
 
   <script>
     Redoc.init(
       './data.yaml',
       {
-        scrollYOffset: 60,
         hideDownloadButton: false,
         disableSearch: false,
-        expandResponses: '200,201',
+        expandResponses: '200',
         nativeScrollbars: true,
+        scrollYOffset: 64,
+
         theme: {
           colors: {
             primary: {
-              main: '#0f172a'
+              main: '#2563eb'   // Professional blue
+            },
+            success: {
+              main: '#16a34a'
             }
           },
-          sidebar: {
-            width: '300px',
-            backgroundColor: '#0f172a'
-          },
-          rightPanel: {
-            backgroundColor: '#020617',
-            width: '38%'
-          },
+
           typography: {
             fontSize: '14px',
+            lineHeight: '1.6',
             headings: {
-              fontWeight: '600'
+              fontWeight: '600',
+              lineHeight: '1.4'
             }
+          },
+
+          sidebar: {
+            width: '280px',
+            backgroundColor: '#0f172a',
+            textColor: '#e5e7eb',
+            activeTextColor: '#38bdf8'
+          },
+
+          rightPanel: {
+            backgroundColor: '#020617',
+            textColor: '#e5e7eb',
+            width: '34%'
+          },
+
+          codeBlock: {
+            backgroundColor: '#020617'
           }
         }
       },
-      document.getElementById('redoc-container')
+      document.getElementById('redoc-root')
     );
   </script>
 </body>
