@@ -83,39 +83,30 @@
   <div id="redoc-root"></div>
 
   <script>
-    Redoc.init(
-      './data.yaml',
-      {
-        scrollYOffset: 68,
-        hideDownloadButton: false,
-        nativeScrollbars: true,
+  Redoc.init(
+    'https://bharathbm-dotcom.github.io/pinnacleteledoc/data.yaml',
+    {
+      scrollYOffset: 68,
+      hideDownloadButton: false,
+      nativeScrollbars: true,
 
-        theme: {
-          colors: {
-            primary: {
-              main: '#2563eb'
-            }
-          },
-
-          sidebar: {
-            width: '280px',
-            backgroundColor: 'var(--sidebar-bg)',
-            textColor: '#e5e7eb',
-            activeTextColor: '#38bdf8'
-          },
-
-          typography: {
-            fontSize: '14px',
-            headings: {
-              fontWeight: '600'
-            }
+      theme: {
+        colors: {
+          primary: {
+            main: '#2563eb'
           }
-          // ✅ Right panel stays original dark (as you requested)
+        },
+        sidebar: {
+          width: '280px',
+          backgroundColor: '#0f4c81',
+          textColor: '#e5e7eb',
+          activeTextColor: '#38bdf8'
         }
-      },
-      document.getElementById('redoc-root')
-    );
-  </script>
+      }
+    },
+    document.getElementById('redoc-root')
+  );
+</script>
 
 </body>
 </html>
