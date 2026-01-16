@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>WBS API Documentation</title>
+<head>
+  <meta charset="UTF-8" />
+  <title>Pinnacle API Documentation</title>
 
-    <!-- Mobile friendly -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Swagger UI CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/swagger-ui-dist/swagger-ui.css"
+  />
 
-    <!-- Redoc styles -->
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
+  <!-- Custom UI Styling -->
+  <link rel="stylesheet" href="custom.css" />
 
-  <body>
-    <!-- Redoc will render here -->
-    <redoc
-      spec-url="data.yaml"
-      scroll-y-offset="60"
-      hide-download-button="false"
-    ></redoc>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
 
-    <!-- Redocly CDN -->
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-  </body>
+<body>
+  <!-- Custom Header -->
+  <header class="top-bar">
+    <div class="brand">
+      <h1>Pinnacle API Documentation</h1>
+      <p>Omnichannel Communication Platform</p>
+    </div>
+  </header>
+
+  <!-- Swagger UI -->
+  <div id="swagger-ui"></div>
+
+  <!-- Swagger UI JS -->
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
+
+  <script>
+    window.onload = () => {
+      SwaggerUIBundle({
+        url: "./swagger.yaml",   // your unified swagger file
+        dom_id: "#swagger-ui",
+        deepLinking: true,
+        displayOperationId: false,
+        defaultModelsExpandDepth: -1,
+        defaultModelExpandDepth: 2,
+        docExpansion: "list",
+        filter: true,
+        showExtensions: true,
+        tryItOutEnabled: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        layout: "StandaloneLayout"
+      });
+    };
+  </script>
+</body>
 </html>
