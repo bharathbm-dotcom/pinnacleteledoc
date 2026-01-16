@@ -5,11 +5,30 @@
   <title>Pinnacle API Documentation</title>
 
   <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-  <link rel="stylesheet" href="./redoc.css">
+  <link rel="stylesheet" href="./redoc.css" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
+
 <body>
-  <redoc spec-url="./data.yaml"></redoc>
+  <div id="redoc-container"></div>
+
+  <script>
+    Redoc.init(
+      './data.yaml',
+      {
+        hideDownloadButton: true,
+        expandResponses: '200,201',
+        theme: {
+          colors: {
+            primary: {
+              main: '#0f172a'
+            }
+          }
+        }
+      },
+      document.getElementById('redoc-container')
+    );
+  </script>
 </body>
 </html>
