@@ -1,0 +1,92 @@
+/* Global */
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  background: #f6f8fb;
+}
+
+/* Top Bar */
+.top-bar {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  padding: 18px 40px;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.top-bar p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Swagger UI Container */
+.swagger-ui {
+  padding: 20px 40px;
+}
+
+/* Section Headers */
+.swagger-ui .opblock-tag {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 6px;
+  background: #ffffff;
+  margin-bottom: 10px;
+}
+
+/* Operation Card */
+.swagger-ui .opblock {
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* HTTP Method Colors */
+.swagger-ui .opblock-get {
+  border-left: 6px solid #2f80ed;
+}
+
+.swagger-ui .opblock-post {
+  border-left: 6px solid #27ae60;
+}
+
+/* Buttons */
+.swagger-ui .btn.execute {
+  background-color: #27ae60 !important;
+  border-radius: 6px;
+}
+
+.swagger-ui .btn.authorize {
+  background-color: #2f80ed !important;
+  color: #fff !important;
+  border-radius: 6px;
+}
+
+/* Models Section */
+.swagger-ui section.models {
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+/* Code Blocks */
+.swagger-ui .highlight-code {
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .swagger-ui {
+    padding: 15px;
+  }
+
+  .top-bar {
+    padding: 15px 20px;
+  }
+}
