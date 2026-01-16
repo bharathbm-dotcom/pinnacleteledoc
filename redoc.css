@@ -1,28 +1,30 @@
-/* SAFE ReDoc UI Customization */
+/* ===============================
+   SAFE REDOC UI CUSTOMIZATION
+   =============================== */
 
 body {
   margin: 0;
   font-family: Inter, Roboto, Arial, sans-serif;
 }
 
-.redoc-wrap {
-  background-color: #ffffff;
-}
-
+/* Sidebar */
 .menu-content {
-  background-color: #0f172a; /* dark sidebar */
+  background-color: #0f172a;
 }
 
-.menu-content label {
-  color: #e5e7eb;
-}
-
+.menu-content label,
+.menu-content span,
 .menu-content a {
-  color: #cbd5f5;
+  color: #e5e7eb !important;
 }
 
 .menu-content a:hover {
-  color: #ffffff;
+  color: #ffffff !important;
+}
+
+/* Main content */
+.api-content {
+  max-width: 1200px;
 }
 
 .api-content h1,
@@ -31,12 +33,31 @@ body {
   color: #0f172a;
 }
 
-.api-content {
-  max-width: 1200px;
+/* HTTP Method badges */
+.http-verb {
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-weight: 600;
 }
 
-code {
-  background: #f1f5f9;
-  padding: 2px 6px;
-  border-radius: 4px;
+/* Code blocks */
+code,
+pre {
+  background: #f1f5f9 !important;
+  border-radius: 6px;
+}
+
+/* Tables */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 8px;
 }
