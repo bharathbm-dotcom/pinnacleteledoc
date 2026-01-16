@@ -1,92 +1,36 @@
-/* Global */
-body {
-  margin: 0;
-  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
-  background: #f6f8fb;
+/* Sidebar */
+.menu-content {
+  border-right: 1px solid #e0e0e0;
 }
 
-/* Top Bar */
-.top-bar {
-  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-  padding: 18px 40px;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+/* Operation titles */
+h2, h3 {
+  letter-spacing: -0.02em;
 }
 
-.top-bar h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
+/* HTTP method badges */
+.http-verb {
+  border-radius: 6px !important;
+  padding: 4px 8px;
 }
 
-.top-bar p {
-  margin: 4px 0 0;
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-/* Swagger UI Container */
-.swagger-ui {
-  padding: 20px 40px;
-}
-
-/* Section Headers */
-.swagger-ui .opblock-tag {
-  font-size: 18px;
-  font-weight: 600;
-  padding: 12px;
-  border-radius: 6px;
-  background: #ffffff;
-  margin-bottom: 10px;
-}
-
-/* Operation Card */
-.swagger-ui .opblock {
+/* Code blocks */
+pre {
   border-radius: 8px;
-  margin-bottom: 15px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
 }
 
-/* HTTP Method Colors */
-.swagger-ui .opblock-get {
-  border-left: 6px solid #2f80ed;
+/* Response boxes */
+.response {
+  border-left: 4px solid #C62828;
 }
 
-.swagger-ui .opblock-post {
-  border-left: 6px solid #27ae60;
-}
-
-/* Buttons */
-.swagger-ui .btn.execute {
-  background-color: #27ae60 !important;
-  border-radius: 6px;
-}
-
-.swagger-ui .btn.authorize {
-  background-color: #2f80ed !important;
-  color: #fff !important;
-  border-radius: 6px;
-}
-
-/* Models Section */
-.swagger-ui section.models {
+/* Tables */
+table {
   border-radius: 8px;
-  background: #ffffff;
-  padding: 10px;
+  overflow: hidden;
 }
 
-/* Code Blocks */
-.swagger-ui .highlight-code {
-  border-radius: 6px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .swagger-ui {
-    padding: 15px;
-  }
-
-  .top-bar {
-    padding: 15px 20px;
-  }
+/* Hide Try It Out (ReDoc is docs-first) */
+.try-it-out {
+  display: none;
 }
