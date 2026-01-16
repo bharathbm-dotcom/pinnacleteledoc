@@ -4,173 +4,118 @@
   <meta charset="UTF-8" />
   <title>Pinnacle API Documentation</title>
 
-  <!-- ReDoc -->
   <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     :root {
       --primary: #2563eb;
-      --bg: #f9fafb;
+      --bg: #f8fafc;
       --text: #0f172a;
-      --right-bg: #e0f2fe;
-      --code-bg: #bae6fd;
+      --sidebar-bg: linear-gradient(180deg, #0f4c81, #0b3c5d);
     }
 
-    body.dark {
-      --primary: #60a5fa;
-      --bg: #020617;
-      --text: #e5e7eb;
-      --right-bg: #020617;
-      --code-bg: #020617;
-    }
-
-    html, body {
+    body {
       margin: 0;
-      height: 100%;
       font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
 
-    /* 🔝 Sticky Top Bar */
-    .topbar {
+    /* ================= HEADER ================= */
+    .top-nav {
       position: sticky;
       top: 0;
-      z-index: 9999;
-      height: 56px;
-      background: white;
+      z-index: 1000;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 24px;
+      background: #ffffff;
       border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
     }
 
-    body.dark .topbar {
-      background: #020617;
-      border-color: #1e293b;
+    .top-nav img {
+      height: 42px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .top-nav h1 {
+      font-size: 28px; /* slightly increased */
       font-weight: 600;
-      font-size: 16px;
+      margin: 0;
+      letter-spacing: 0.3px;
     }
 
-    .brand img {
-      height: 32px;
-    }
-
-    .toggle {
-      cursor: pointer;
-      border: 1px solid #cbd5f5;
-      padding: 6px 12px;
-      border-radius: 6px;
-      background: var(--primary);
-      color: white;
-      font-size: 13px;
-    }
-
+    /* ================= REDOC ================= */
     #redoc-root {
-      height: calc(100% - 56px);
+      height: calc(100vh - 68px);
     }
 
-    /* 🎨 UI Enhancements */
-    .http-verb {
-      font-weight: 700 !important;
-      border-radius: 6px !important;
+    /* ================= BADGES ================= */
+    .http-verb.get {
+      background: #22c55e !important;
+      color: #ffffff !important;
     }
 
-    .http-verb.get { background: #22c55e !important; }
-    .http-verb.post { background: #3b82f6 !important; }
-    .http-verb.put { background: #f59e0b !important; }
-    .http-verb.delete { background: #ef4444 !important; }
+    .http-verb.post {
+      background: #3b82f6 !important;
+      color: #ffffff !important;
+    }
 
-    .response-samples, pre {
-      border-radius: 12px !important;
+    /* ================= RESPONSE CARDS ================= */
+    .redoc-json {
+      border-radius: 14px !important;
     }
   </style>
 </head>
 
 <body>
-  <!-- 🔝 Sticky Header -->
-  <div class="topbar">
-    <div class="brand">
-      <!-- 🔷 Replace logo.png with your actual logo -->
-      <img src="logo.png" alt="Pinnacle Logo" />
-      Pinnacle API Documentation
-    </div>
 
-    <div class="toggle" onclick="toggleTheme()">
-      🌗 Toggle Theme
-    </div>
+  <!-- 🔹 Sticky Header with Logo -->
+  <div class="top-nav">
+    <!-- ✅ Correct path based on your repo -->
+    <img src="./pinnacle-logo.png" alt="Pinnacle Logo" />
+    <h1>Pinnacle API Documentation</h1>
   </div>
 
+  <!-- 🔹 Redoc Container -->
   <div id="redoc-root"></div>
 
   <script>
-    let dark = false;
+    Redoc.init(
+      './data.yaml',
+      {
+        scrollYOffset: 68,
+        hideDownloadButton: false,
+        nativeScrollbars: true,
 
-    function loadRedoc() {
-      Redoc.init(
-        './data.yaml',
-        {
-          hideDownloadButton: false,
-          expandResponses: '200',
-          nativeScrollbars: true,
-          scrollYOffset: 56,
+        theme: {
+          colors: {
+            primary: {
+              main: '#2563eb'
+            }
+          },
 
-          theme: {
-            colors: {
-              primary: {
-                main: getComputedStyle(document.body)
-                  .getPropertyValue('--primary')
-              }
-            },
+          sidebar: {
+            width: '280px',
+            backgroundColor: 'var(--sidebar-bg)',
+            textColor: '#e5e7eb',
+            activeTextColor: '#38bdf8'
+          },
 
-            sidebar: {
-              width: '280px',
-              backgroundColor: dark ? '#020617' : '#0f172a',
-              textColor: '#e5e7eb',
-              activeTextColor: '#38bdf8'
-            },
-
-            rightPanel: {
-              backgroundColor: getComputedStyle(document.body)
-                .getPropertyValue('--right-bg'),
-              textColor: getComputedStyle(document.body)
-                .getPropertyValue('--text'),
-              width: '34%'
-            },
-
-            codeBlock: {
-              backgroundColor: getComputedStyle(document.body)
-                .getPropertyValue('--code-bg')
-            },
-
-            typography: {
-              fontSize: '14px',
-              lineHeight: '1.6',
-              headings: { fontWeight: '600' }
+          typography: {
+            fontSize: '14px',
+            headings: {
+              fontWeight: '600'
             }
           }
-        },
-        document.getElementById('redoc-root')
-      );
-    }
-
-    function toggleTheme() {
-      dark = !dark;
-      document.body.classList.toggle('dark', dark);
-      document.getElementById('redoc-root').innerHTML = '';
-      loadRedoc();
-    }
-
-    loadRedoc();
+          // ✅ Right panel stays original dark (as you requested)
+        }
+      },
+      document.getElementById('redoc-root')
+    );
   </script>
+
 </body>
 </html>
