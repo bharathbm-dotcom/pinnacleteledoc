@@ -1,18 +1,21 @@
 openapi: 3.0.3
+
 info:
   title: Pinnacle Api Documentation
   description: >
     Pinnacle Teleservices Pvt. Ltd. offers digital communication solutions,
     focusing on automated, omnichannel customer engagement through services
     like WhatsApp Business API, Google RCS, bulk SMS, IVR, and AI-powered
-    chatbots. It helps businesses build strong customer relationships via
-    personalized messaging, promotions, and customer support across multiple
-    channels, backed by direct telecom connectivity for reliability,
-    delivery tracking, and performance monitoring.
+    chatbots. It enables businesses to build customer relationships via
+    personalized messaging, promotions, and customer support with direct
+    telecom connectivity for reliability and tracking.
   version: 1.0.0
 
 servers:
-  - url: https://XXXXXX.pinnacle.com
+  - url: https://api.yourdomain.com
+
+security:
+  - ApiKeyAuth: []
 
 components:
   securitySchemes:
@@ -22,6 +25,17 @@ components:
       name: apikey
 
   schemas:
+
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        code:
+          type: integer
+        data:
+          type: object
+
     Image:
       type: object
       properties:
@@ -31,94 +45,143 @@ components:
           type: string
         key:
           type: string
-
-    PhoneNumber:
+          
+    Suggestion:
       type: object
       properties:
-        number:
+        typeOfAction:
           type: string
-        label:
+          enum: [reply, url_action, dialer_action]
+        suggestionText:
           type: string
-        countryCode:
+        urlAction:
           type: string
-        country:
-          type: string
+        phoneNumberToDial:
+          type: object
+          properties:
+            countryCode:
+              type: string
+            number:
+              type: string
 
-    Website:
+    SMSFallback:
       type: object
       properties:
-        url:
+        senderId:
           type: string
-        label:
+        messageType:
+          type: string
+          enum: [TXT, UNI]
+        dltEntityId:
+          type: string
+        dltTempId:
+          type: string
+        message:
           type: string
 
-    Email:
+    TextMessageDetails:
       type: object
       properties:
-        email:
+        messageContent:
           type: string
-        label:
-          type: string
+        suggestionsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Suggestion'
 
-    Bot:
+    RichCard:
+      type: object
+      properties:
+        cardOrientation:
+          type: string
+          enum: [HORIZONTAL, VERTICAL]
+        cardAlignment:
+          type: string
+          enum: [LEFT, RIGHT]
+        mediaHeight:
+          type: string
+          enum: [SHORT_HEIGHT, MEDIUM_HEIGHT]
+        cardTitle:
+          type: string
+        cardDescription:
+          type: string
+        mediaType:
+          type: string
+          enum: [image, video]
+        media:
+          $ref: '#/components/schemas/Image'
+        thumbnail:
+          $ref: '#/components/schemas/Image'
+        suggestionsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Suggestion'
+
+    CarouselCard:
+      type: object
+      properties:
+        cardId:
+          type: string
+        cardTitle:
+          type: string
+        cardDescription:
+          type: string
+        mediaType:
+          type: string
+          enum: [image, video]
+        cardMedia:
+          $ref: '#/components/schemas/Image'
+        cardThumbnail:
+          $ref: '#/components/schemas/Image'
+        suggestionsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Suggestion'
+
+    Carousel:
+      type: object
+      properties:
+        cardWidth:
+          type: string
+          enum: [SMALL_WIDTH, MEDIUM_WIDTH]
+        mediaHeight:
+          type: string
+          enum: [SHORT_HEIGHT, MEDIUM_HEIGHT]
+        cardsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarouselCard'
+
+    Template:
       type: object
       properties:
         _id:
           type: string
+        botId:
+          type: string
         orgId:
-          type: string
-        brandName:
-          type: string
-        brandId:
-          type: string
-        botName:
-          type: string
-        botType:
           type: string
         botMessageType:
           type: string
-        botLogoImage:
-          $ref: '#/components/schemas/Image'
-        botBannerImage:
-          $ref: '#/components/schemas/Image'
-        shortDescription:
+          enum: [PROMOTIONAL, TRANSACTIONAL, OTP]
+        templateName:
           type: string
-        color:
+        templateType:
           type: string
-        phoneNumbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneNumber'
-        websites:
-          type: array
-          items:
-            $ref: '#/components/schemas/Website'
-        emails:
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
-        termsofUseUrl:
-          type: string
-        privacyPolicyUrl:
-          type: string
-        developmentPlatform:
-          type: string
-        chatbotWebhook:
-          type: string
-        languagesSupported:
-          type: string
+          enum: [text_message, rich_card, carousel]
         status:
           type: string
-        templateIds:
-          type: array
-          items:
-            type: string
-        clientName:
-          type: string
-        testDevices:
-          type: array
-          items:
-            type: string
+          enum: [pending, approved, rejected]
+        isSMSFallbackRequired:
+          type: boolean
+        smsFallbackTemplateDetails:
+          $ref: '#/components/schemas/SMSFallback'
+        textMessageDetails:
+          $ref: '#/components/schemas/TextMessageDetails'
+        richCardStandAloneDetails:
+          $ref: '#/components/schemas/RichCard'
+        richCardCarouselDetails:
+          $ref: '#/components/schemas/Carousel'
         createdAt:
           type: string
           format: date-time
@@ -128,117 +191,24 @@ components:
 
 paths:
 
-  /v1/get-botId-by-botName:
-    get:
-      summary: Get botId by botName
-      description: Fetch botId using bot name
-      security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: botName
-          in: query
-          required: true
-          description: Name of bot
-          schema:
-            type: string
-      responses:
-        '200':
-          description: BotId fetched successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  code:
-                    type: integer
-                  data:
-                    type: object
-                    properties:
-                      message:
-                        type: string
-                      botName:
-                        type: string
-                      orgId:
-                        type: string
-                      botId:
-                        type: string
-
-  /v1/get-all-bots:
-    get:
-      summary: Get all bots
-      description: Fetch all bots
-      security:
-        - ApiKeyAuth: []
-      responses:
-        '200':
-          description: All bots fetched
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  code:
-                    type: integer
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Bot'
-                      message:
-                        type: string
-
   /v1/get-all-launched-bots-by-orgId:
     get:
       summary: Get launched bots by orgId
-      description: Fetch launched bots for an organization
-      security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: orgId
-          in: query
-          required: true
-          description: Organization ID
-          schema:
-            type: string
       responses:
         '200':
-          description: Launched bots fetched
+          description: Launched bots fetched successfully
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  code:
-                    type: integer
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Bot'
-                      message:
-                        type: string
+                $ref: '#/components/schemas/ApiResponse'
 
   /v1/get-bot-details/{botId}:
     get:
       summary: Get bot details by botId
-      description: Fetch detailed bot information
-      security:
-        - ApiKeyAuth: []
       parameters:
         - name: botId
           in: path
           required: true
-          description: Bot ID
           schema:
             type: string
       responses:
@@ -247,11 +217,143 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  code:
-                    type: integer
-                  data:
-                    $ref: '#/components/schemas/Bot'
+                $ref: '#/components/schemas/ApiResponse'
+
+  /v1/create-template:
+    post:
+      summary: Create Template (Text / Rich Card / Carousel)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+      responses:
+        '201':
+          description: Template created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /v1/update-template:
+    post:
+      summary: Update Template
+      parameters:
+        - name: templateId
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+      responses:
+        '200':
+          description: Template updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /v1/get-all-templates-by-botid:
+    get:
+      summary: Get templates by botId
+      parameters:
+        - name: botId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Templates fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+
+  /v1/get-template-status/{botId}/{templateName}:
+    get:
+      summary: Get template status
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: templateName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Template status fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /v1/get-template:
+    get:
+      summary: Get templates with filters
+      parameters:
+        - name: botId
+          in: query
+          schema:
+            type: string
+        - name: templateType
+          in: query
+          schema:
+            type: string
+        - name: templateName
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: currentPage
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Templates fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /v1/get-templateId-by-templateName-and-botId:
+    get:
+      summary: Get templateId by templateName and botId
+      parameters:
+        - name: templateName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: botId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TemplateId fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
