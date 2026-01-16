@@ -1,40 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Pinnacle API Documentation</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pinnacle API Documentation</title>
 
-    <!-- ReDoc -->
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+  <!-- ReDoc -->
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="redoc.css"/>
+  <!-- Custom UI -->
+  <link rel="stylesheet" href="./redoc.css" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
 
-  <body>
-    <redoc
-      spec-url="./data.yaml"
-      expand-responses="200,201"
-      path-in-middle-panel
-      hide-hostname
-      theme='{
-        "colors": {
-          "primary": {
-            "main": "#C62828"
-          }
-        },
-        "typography": {
-          "fontFamily": "Inter, Arial, sans-serif",
-          "headings": {
-            "fontWeight": "600"
-          }
-        },
-        "sidebar": {
-          "backgroundColor": "#fafafa"
-        }
-      }'
-    ></redoc>
-  </body>
+<body>
+  <redoc
+    spec-url="./data.yaml"
+    lazy-rendering
+    expand-responses="200,201"
+    hide-download-button
+  ></redoc>
+</body>
 </html>
