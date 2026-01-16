@@ -1,9 +1,9 @@
-/* ===============================
-   SAFE REDOC UI CUSTOMIZATION
-   =============================== */
+/* SAFE REDOC CSS — DO NOT REMOVE STRUCTURAL STYLES */
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: Inter, Roboto, Arial, sans-serif;
 }
 
@@ -13,13 +13,8 @@ body {
 }
 
 .menu-content label,
-.menu-content span,
 .menu-content a {
   color: #e5e7eb !important;
-}
-
-.menu-content a:hover {
-  color: #ffffff !important;
 }
 
 /* Main content */
@@ -27,37 +22,15 @@ body {
   max-width: 1200px;
 }
 
-.api-content h1,
-.api-content h2,
-.api-content h3 {
-  color: #0f172a;
-}
-
-/* HTTP Method badges */
-.http-verb {
-  border-radius: 6px;
-  padding: 4px 10px;
-  font-weight: 600;
-}
-
 /* Code blocks */
-code,
-pre {
+pre, code {
   background: #f1f5f9 !important;
   border-radius: 6px;
 }
 
-/* Tables */
-table {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 8px;
-}
+/* DO NOT TOUCH THESE */
+/*
+.redoc-wrap
+.redoc-container
+redoc
+*/
